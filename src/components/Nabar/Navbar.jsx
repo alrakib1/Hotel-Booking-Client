@@ -15,10 +15,13 @@ import MenuItem from "@mui/material/MenuItem";
 const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 import "./Styles/Nav.css"
+import useAuth from '../../hooks/useAuth'
 
 const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const {logOut}= useAuth();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -34,6 +37,13 @@ const Navbar = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const handleLogout = ()=>{
+    console.log('log out click')
+    logOut().then(result=>{
+      console.log(result)
+    })
+  }
 
   return (
     <AppBar color="transparent" position="static">
@@ -163,7 +173,7 @@ const Navbar = () => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} className="bg-black" onClick={handleCloseUserMenu}>
+                <MenuItem key={setting} className="bg-black"  onClick={setting === 'Logout' ? handleLogout : handleCloseUserMenu}>
                   <Typography textAlign="center" color="#0272E2">{setting}</Typography>
                 </MenuItem>
               ))}

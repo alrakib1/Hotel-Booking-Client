@@ -51,7 +51,7 @@ export default function SignInSide() {
     const password = data.get("password");
     console.log(email, password);
     logIn(email, password).then((result) => {
-      console.log(result.data);
+      console.log(result);
     });
   };
 
