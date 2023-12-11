@@ -12,16 +12,18 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 
-const pages = ["Products", "Pricing", "Blog"];
+const pages = ["Products", "Pricing"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
-import "./Styles/Nav.css"
-import useAuth from '../../hooks/useAuth'
+import "./Styles/Nav.css";
+import useAuth from "../../hooks/useAuth";
+import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-  const {logOut}= useAuth();
+  const { logOut, user } = useAuth();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -38,44 +40,50 @@ const Navbar = () => {
     setAnchorElUser(null);
   };
 
-  const handleLogout = ()=>{
-    console.log('log out click')
-    logOut().then(result=>{
-      console.log(result)
-    })
-  }
+  const handleLogout = () => {
+    console.log("log out click");
+    logOut().then((result) => {
+      console.log(result);
+    });
+  };
 
   return (
     <AppBar color="transparent" position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <div className="max-w-[30px] max-h-[30px] ">
-            <img
-              className="hidden lg:block"
-              src="https://i.ibb.co/gwkshyG/hotelfinallogo.png" 
-              alt=""
-            />
-          </div>
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
+          <Link to="/" className="flex">
+            <div className="max-w-[30px] max-h-[30px] ">
+              <img
+                className="hidden lg:block"
+                src="https://i.ibb.co/gwkshyG/hotelfinallogo.png"
+                alt=""
+              />
+            </div>
+            <Typography
+              variant="h6"
+              noWrap
+              sx={{
+                mr: 3,
+                ml: 2,
+                display: { xs: "none", md: "flex" },
+                fontFamily: "monospace",
+                fontWeight: 700,
+                letterSpacing: ".3rem",
+                color: "inherit",
+                textDecoration: "none",
+              }}
+            >
+              HOTEL
+            </Typography>
+          </Link>
+
+          <Box
             sx={{
-              mr: 3,
-              ml: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
+              flexGrow: 1,
+              fontWeight: "bold",
+              display: { xs: "flex", md: "none" },
             }}
           >
-            HOTEL
-          </Typography>
-
-          <Box sx={{ flexGrow: 1, fontWeight: 'bold', display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -106,15 +114,34 @@ const Navbar = () => {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center" color="#0272E2">{page}</Typography>
+                  <Typography textAlign="center" color="#0272E2">
+                    {page}
+                  </Typography>
                 </MenuItem>
               ))}
+              {user ? (
+                <Button> log Out</Button>
+              ) : (
+                <Button
+                  disableRipple
+                  disableElevation
+                  onClick={handleCloseNavMenu}
+                  sx={{
+                    my: 2,
+                    fontWeight: "bold",
+                    color: "#0272E2",
+                    display: "block",
+                  }}
+                >
+                  <NavLink to="/login">Log in</NavLink>
+                </Button>
+              )}
             </Menu>
           </Box>
           <div className="max-w-[30px] max-h-[30px] ">
             <img
               className="block lg:hidden"
-              src="https://i.ibb.co/gwkshyG/hotelfinallogo.png" 
+              src="https://i.ibb.co/gwkshyG/hotelfinallogo.png"
               alt=""
             />
           </div>
@@ -139,15 +166,52 @@ const Navbar = () => {
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
-              disableRipple 
-              disableElevation
+                disableRipple
+                disableElevation
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, fontWeight: 'bold', color: "#0272E2", display: "block" }}
+                sx={{
+                  my: 2,
+                  fontWeight: "bold",
+                  color: "#0272E2",
+                  display: "block",
+                }}
               >
                 {page}
               </Button>
             ))}
+            {user ? (
+              <Button
+                disableRipple
+                disableElevation
+                sx={{
+                  my: 2,
+                  fontWeight: "bold",
+                  color: "#0272E2",
+                  display: "block",
+                }}
+                onClick={handleLogout}
+              >
+                {" "}
+                log Out
+              </Button>
+            ) : (
+              <Button
+           
+                disableRipple
+                disableElevation
+                onClick={handleCloseNavMenu}
+                sx={{
+                  my: 2,
+                  fontWeight: "bold",
+                  color: "#0272E2",
+                  display: "block",
+                  
+                }}
+              >
+                <NavLink to="/login">Log in</NavLink>
+              </Button>
+            )}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
@@ -157,7 +221,7 @@ const Navbar = () => {
               </IconButton>
             </Tooltip>
             <Menu
-              sx={{ mt: "45px", fontWeight: 'bold', }}
+              sx={{ mt: "45px", fontWeight: "bold" }}
               id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{
@@ -173,8 +237,16 @@ const Navbar = () => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} className="bg-black"  onClick={setting === 'Logout' ? handleLogout : handleCloseUserMenu}>
-                  <Typography textAlign="center" color="#0272E2">{setting}</Typography>
+                <MenuItem
+                  key={setting}
+                  className="bg-black"
+                  onClick={
+                    setting === "Logout" ? handleLogout : handleCloseUserMenu
+                  }
+                >
+                  <Typography textAlign="center" color="#0272E2">
+                    {setting}
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>

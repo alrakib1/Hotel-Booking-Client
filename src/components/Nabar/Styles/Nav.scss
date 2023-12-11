@@ -7,3 +7,13 @@ header {
   border-bottom: 4px solid $secondary-color;
 }
 
+Button:hover{
+  cursor: auto;
+}
+
+a.active{
+  background-color: $secondary-color; 
+  padding: 5px;
+  border-radius: 2px;
+  color: white;
+}
