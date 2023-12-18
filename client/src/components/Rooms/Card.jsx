@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 
 const Card = ({ room }) => {
-    console.log("🚀 ~ file: Card.jsx:4 ~ Card ~ room :", room )
+    // console.log("🚀 ~ file: Card.jsx:4 ~ Card ~ room :", room )
     
   return (
     <div className="col-span-1 cursor-pointer group">
@@ -40,9 +40,9 @@ const Card = ({ room }) => {
 
         {/* TODO: data range function must be implemented to create the date range */}
         
-        {/* <div className="font-light text-neutral-500">
-          5 nights . June 19 - 26
-        </div> */}
+        <div className="font-light text-neutral-500">
+          5 nights 
+        </div>
         <div className="flex flex-row items-center gap-1">
           <div className="font-semibold">${room.price}</div>
           <div className="font-light">night</div>
