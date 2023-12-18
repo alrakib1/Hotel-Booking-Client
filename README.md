@@ -1,1 +1,1 @@
-## Stya vista hotel Website
+## Stay vista hotel Website
