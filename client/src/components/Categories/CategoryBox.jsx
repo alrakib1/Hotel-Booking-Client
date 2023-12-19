@@ -15,6 +15,7 @@ const CategoryBox = ({ label, icon: Icon, selected }) => {
     let currentQuery = {};
     if (params) {
       currentQuery = qs.parse(params.toString());
+    }
       const updatedQuery = { ...currentQuery, category: label };
 
       const url = qs.stringifyUrl({
@@ -22,7 +23,6 @@ const CategoryBox = ({ label, icon: Icon, selected }) => {
         query: updatedQuery,
       });
       navigate(url);
-    }
 
     // console.log('clicked',label)
   };
@@ -52,10 +52,3 @@ CategoryBox.propTypes = {
 
 export default CategoryBox;
 
-/**
- *
- * Stay vista
- * part-05
- * 00.00
- *
- */
