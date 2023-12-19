@@ -27,13 +27,28 @@ const RoomDetails = () => {
     return <Loader />;
   }
 
-  console.log("🚀 ~ file: RoomDetails.jsx:5 ~ RoomDetails ~ id:", id, room);
+  
   return <Container>
 
 
     <Helmet>
       <title>{room?.title}</title>
     </Helmet>
+    <div className="">
+      <div className="flex flex-col gap-6">
+
+  {/* Header */}
+      </div>
+      <div className="">
+      {/* room info */}
+      </div>
+      <div className="">
+        
+        {/* calender */}
+      
+      
+      </div>
+      </div>
   </Container>;
 };
 
