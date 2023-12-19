@@ -30,7 +30,7 @@ const CategoryBox = ({ label, icon: Icon, selected }) => {
       className={`flex flex-col items-center justify-center gap-2 p-3 border-b-2 hover:text-neutral-800 transition cursor-pointer ${
         selected
           ? "border-b-neutral-800 text-neutral-800"
-          : "border-transparent text-neutral-500"
+          : ""
       }`}
     >
       <Icon size={26} />
@@ -50,7 +50,7 @@ export default CategoryBox;
 /**
  *
  * Stay vista
- * part-04
- * 12:19
+ * part-05
+ * 00.00
  *
  */
