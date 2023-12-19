@@ -3,7 +3,12 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import qs from "query-string";
 
 const CategoryBox = ({ label, icon: Icon, selected }) => {
-  const [params, setParams] = useSearchParams();
+  // const [params, setParams] = useSearchParams();
+
+  
+  const arr = useSearchParams();
+
+  const params = arr[0];   
 
   const navigate = useNavigate();
   const handleClick = (label) => {
