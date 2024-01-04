@@ -4,9 +4,8 @@ import { useParams } from "react-router-dom";
 import Loader from "../../components/Shared/Loader";
 import { Helmet } from "react-helmet-async";
 import Header from "../../components/RoomDetails/Header";
-import RoomInfo from "../../components/RoomDetails/Roominfo";
-
-import Calender from "./Calender";
+import RoomInfo from "../../components/RoomDetails/RoomInfo";
+import RoomReservation from "../../components/RoomDetails/RoomReservation";
 
 const RoomDetails = () => {
   const { id } = useParams();
@@ -41,7 +40,7 @@ const RoomDetails = () => {
         <div className="grid grid-cols-1 md:grid-cols-7 md:gap-10 mt-6">
           <RoomInfo room={room} />
           <div className="md:col-span-3 order-first md:order-last mb-10">
-            <Calender />
+            <RoomReservation />
           </div>
         </div>
       </div>
