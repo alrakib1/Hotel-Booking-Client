@@ -18,7 +18,13 @@ const Header = ({ room }) => {
 };
 
 Header.propTypes = {
-  room: PropTypes.node,
-};
-
+    room: PropTypes.arrayOf(
+      PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        location: PropTypes.string.isRequired,
+        image: PropTypes.string.isRequired,
+        // Add other expected properties as needed
+      })
+    ).isRequired,
+  };
 export default Header;

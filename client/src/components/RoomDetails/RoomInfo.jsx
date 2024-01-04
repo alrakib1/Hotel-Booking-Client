@@ -53,7 +53,12 @@ const RoomInfo = ({ room }) => {
 };
 
 RoomInfo.propTypes = {
-  room: PropTypes.node,
+  room: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      image: PropTypes.string.isRequired,
+    })
+  ).isRequired,
 };
 
 export default RoomInfo;
