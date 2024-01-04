@@ -37,4 +37,4 @@ const Button = ({ label, onClick, disabled, outline, small, icon: Icon }) => {
   )
 }
 
-export default Button
+export default Button;
