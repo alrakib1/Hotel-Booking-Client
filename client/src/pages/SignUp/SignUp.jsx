@@ -1,12 +1,16 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 
 import { imageUpload } from "../../api/utils";
 import useAuth from "../../hooks/useAuth";
-import { saveUser } from "../../api/auth";
+import { getToken, saveUser } from "../../api/auth";
+
+import { toast } from "react-hot-toast";
 
 const SignUp = () => {
   const { createUser, updateUserProfile, signInWithGoogle } = useAuth();
+
+  const navigate = useNavigate();
 
   // form submit handler
   const handleSubmit = async (event) => {
@@ -21,10 +25,9 @@ const SignUp = () => {
     try {
       // upload image
       const imageData = await imageUpload(image);
-  
-// create user
-      const result = await createUser(email, password);
 
+      // create user
+      const result = await createUser(email, password);
 
       await updateUserProfile(name, imageData?.display_url);
 
@@ -32,17 +35,18 @@ const SignUp = () => {
 
       // save user data in database
 
-const dbResponse = await saveUser(result?.user);
-// console.log(dbResponse);
+      const dbResponse = await saveUser(result?.user);
+      console.log(dbResponse);
 
+      // get token
 
-
+      await getToken(result?.user?.email);
+      navigate("/");
+      toast.success("signup successful");
     } catch (error) {
-      console.log(error);
+      toast.error(error?.message);
     }
   };
-
-
 
   return (
     <div className="flex justify-center items-center min-h-screen">
