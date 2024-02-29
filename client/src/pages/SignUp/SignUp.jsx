@@ -49,6 +49,28 @@ const SignUp = () => {
     }
   };
 
+  // handle Google Signin
+
+  const handleGoogleSignin = async () => {
+    try {
+      // user signin with google
+      const result = await signInWithGoogle();
+
+      // save user data in database
+
+      const dbResponse = await saveUser(result?.user);
+      console.log(dbResponse);
+
+      // get token
+
+      await getToken(result?.user?.email);
+      navigate("/");
+      toast.success("signup successful");
+    } catch (error) {
+      toast.error(error?.message);
+    }
+  };
+
   return (
     <div className="flex justify-center items-center min-h-screen">
       <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900">
@@ -142,7 +164,7 @@ const SignUp = () => {
         </div>
         <div
           className="flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer"
-          onClick={signInWithGoogle}
+          onClick={handleGoogleSignin}
         >
           <FcGoogle size={32} />
 
